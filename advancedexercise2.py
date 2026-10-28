@@ -32,8 +32,9 @@ print(b)
 c %= 4
 print(c)
 # TODO: Calculate the square root of (a^2 + b^2 + c^2)
+result = math.sqrt(a**2 + b**2 + c**2)
 # TODO: Print the final result rounded to 2 decimal places
-
+print(round(result, 2))
 
 # -------------------------------------------
 # Question 2: Complex Conditional Evaluation
@@ -50,12 +51,23 @@ print(c)
 # Tip: Use and/or to join conditions.
 
 # TODO: Input x, y, z
+x = int(input("Enter x: "))
+y = int(input("Enter y: "))
+z = int(input("Enter z: "))
+
 # TODO: Create conditions:
 #   is_even = True if x is even
 #   is_positive = True if y > 0
 #   is_in_range = True if z between 10 and 50
+is_even = x % 2 == 0
+is_positive = y > 0
+is_in_range = 10 <= z <= 50
+
 # TODO: Create final_condition = is_even and is_positive and is_in_range
+final_condition = is_even and is_positive and is_in_range
+
 # TODO: Print final_condition
+print(final_condition)
 
 
 # -------------------------------------------
@@ -72,10 +84,25 @@ print(c)
 # Tip: Use min() and max() to constrain the score.
 
 # TODO: Input score from user
+score = float(input("Enter your base score: "))
 # TODO: Apply adjustments
-# TODO: Clamp score between 0 and 100
-# TODO: Use if-elif-else to determine grade and print it
+score += 5  # bonus points
+score -= 10  # late penalty
 
+# TODO: Clamp score between 0 and 100
+score = max(0, min(100, score))
+
+# TODO: Use if-elif-else to determine grade and print it
+if score >= 80:
+    grade = "A"
+elif score >= 70:
+    grade = "B"
+elif score >= 60:
+    grade = "C"
+else:
+    grade = "D"
+
+print(f"Your final score is {score} and your grade is {grade}.")
 
 # -------------------------------------------
 # Question 4: Advanced Calculator
@@ -89,9 +116,51 @@ print(c)
 # Tip: Use try-except and elif branches for each operation.
 
 # TODO: Input num1, num2
+num1 = float(input("Enter the first number: "))
+num2 = float(input("Enter the second number: "))
 # TODO: Input operation
-# TODO: Match operation using if-elif
-# TODO: Handle division/modulus by zero with try-except
-# TODO: Print result
+operation = input("Enter the operation (+, -, *, /, %, **): ")
 
-# -------------------------------------------
+try:
+    if operation == "+":
+        result = num1 + num2
+    elif operation == "-":
+        result = num1 - num2
+    elif operation == "*":
+        result = num1 * num2
+    elif operation == "/":
+        if num2 == 0:
+            raise ZeroDivisionError("Cannot divide by zero.")
+        result = num1 / num2
+    elif operation == "%":
+        if num2 == 0:
+            raise ZeroDivisionError("Cannot mod by zero.")
+        result = num1 % num2
+    elif operation == "**":
+        result = num1 ** num2
+    else:
+        print("Invalid operation.")
+        raise SystemExit
+
+    print(f"Result: {result}")
+except ZeroDivisionError as error:
+    print(f"Error: {error}")
+    
+# TODO: Match operation using if-elif
+    if operation == "+":
+        result = num1 + num2
+
+# TODO: Handle division/modulus by zero with try-except
+def safe_calculate(numerator, divisor):
+    try:
+        # Both operations will trigger ZeroDivisionError if divisor is 0
+        division_result = numerator / divisor
+        modulus_result = numerator % divisor
+        return division_result, modulus_result
+        
+    except ZeroDivisionError:
+        print("Error: Cannot divide or modulo by zero!")
+        return None, None
+# TODO: Print result
+print(f"Result: {result}")
+# ----------------------------------------
